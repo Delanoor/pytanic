@@ -12,21 +12,54 @@
         <form action="{% url 'result' %}">
             {% csrf_token %}
             <p>Pclass</p>
-            <input type="text" name="pclass">
+            <input type="radio" id="1" name="pclass" value="1">
+            <label for="1">1</label>
+            <input type="radio" id="2" name="pclass" value="2">
+            <label for="2">2</label>
+            <input type="radio" id="3" name="pclass" value="3">
+            <label for="3">3</label>
             <p>Sex</p>
-            <input type="text" name="sex">
+            <input type="radio" id="male" name="sex" value="0">
+            <label for="male">male</label>
+            <input type="radio" id="female" name="sex" value="1">
+            <label for="female">female</label>
             <p>Age</p>
-            <input type="text" name="age">
+            <label for="age">Between 0.45 and 80</label>
+            <input type="number" id='age' name="age" min="0.45" max="80">
             <p>Sibsp</p>
-            <input type="text" name="sibsp">
+            <label for="sibsp">Between 0 and 8</label>
+            <input type="number" id="sibsp" name="sibsp" min="0" max="8">
             <p>Parents/children</p>
-            <input type="text" name="parch">
+            <label for="parch">Between 0 and 6</label>
+            <input type="number" id ="parch" name="parch" min="0" max="6">
             <p>Fare</p>
-            <input type="text" name="fare">
+            <label for="fare">Between 0 and 513</label>
+            <input type="number" id="fare" name="fare" min="0" max="513">
             <p>Embarked</p>
-            <input type="text" name="embarked">
+            <input type="radio" id="S" name="embarked" value="0">
+            <label for="S">S</label>
+            <input type="radio" id="C" name="embarked" value="1">
+            <label for="C">C</label>
+            <input type="radio" id="Q" name="embarked" value="2">
+            <label for="Q">Q</label>
             <p>Title</p>
-            <input type="text" name="title">
+            <input type="radio" id="Mr" name="title" value="0">
+            <label for="Mr">Mr</label><br>
+            <input type="radio" id="Miss" name="title" value="1">
+            <label for="Miss">Miss</label><br>
+            <input type="radio" id="Mrs" name="title" value="2">
+            <label for="Mrs">Mrs</label><br>
+            <input type="radio" id="Master" name="title" value="3">
+            <label for="Master">Master</label><br>
+            <input type="radio" id="Dr" name="title" value="4">
+            <label for="Dr">Dr</label><br>
+            <input type="radio" id="Rev" name="title" value="5">
+            <label for="Rev">Rev</label><br>
+            <input type="radio" id="Officer" name="title" value="6">
+            <label for="Officer">Officer</label><br>
+            <input type="radio" id="Royalty" name="title" value="7">
+            <label for="Royalty">Royalty</label><br>
+
             <input type="submit">
 
         </form>
