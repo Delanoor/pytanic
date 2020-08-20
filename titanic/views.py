@@ -5,7 +5,7 @@ def home(request):
     return render(request, 'index.html')
 
 def result(request):
-    pclass = int(request.GET["pclass"])
+    pclass = round(int(request.GET["pclass"]))
     sex = int(request.GET["sex"])
     age = int(request.GET["age"])
     sibsp = int(request.GET["sibsp"])

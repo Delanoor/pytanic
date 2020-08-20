@@ -4,9 +4,8 @@
 # In[ ]:
 
 
-from sklearn.model_selection import train_test_split
-import pickle
-from sklearn.ensemble import RandomForestClassifier
+from keras.models import Sequential
+from keras.layers import Dense, Dropout
 import pandas as pd
 df = pd.read_csv("train.csv")
 
@@ -33,7 +32,7 @@ def replace_titles(x):
         return 'Miss'
     else:
         return title
-    
+
 # Lets create a new column for the titles
 df['Title'] = df['Name'].map(lambda x: get_title(x))
 # train.Title.value_counts()
@@ -54,15 +53,24 @@ df.Embarked.replace(('S','C','Q'), (0,1,2), inplace = True)
 df.Title.replace(('Mr','Miss','Mrs','Master','Dr','Rev','Officer','Royalty'), (0,1,2,3,4,5,6,7), inplace = True)
 
 
-predictors = df.drop(['Survived', 'PassengerId'], axis=1)
-target = df["Survived"]
-x_train, x_val, y_train, y_val = train_test_split(predictors, target, test_size = 0.22, random_state = 0)
+X = df.drop(['Survived', 'PassengerId'], axis=1)
+y = df["Survived"]
 
+model = Sequential([
+    keras.layers.Dense(32, activation='relu', input_shape=(8,)),
+    keras.layers.Dropout(0.1),
+    keras.layers.Dense(64, activation='relu'),
+    keras.layers.Dropout(0.1),
+    keras.layers.Dense(128, activation='relu'),
+    keras.layers.Dropout(0.1),
+    keras.layers.Dense(64, activation='relu'),
+    keras.layers.Dense(32, activation='relu'),
+    keras.layers.Dense(1, activation='sigmoid')
+])
 
-randomforest = RandomForestClassifier()
-randomforest.fit(x_train, y_train)
-y_pred = randomforest.predict(x_val)
+model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
-filename = 'titanic_model.sav'
-pickle.dump(randomforest, open(filename, 'wb'))
+model_train = model.fit(X, y, epochs=500, batch_size=50, verbose=0,
+                validation_split=0.06)
 
+model.save('titanic_NN.h5')
